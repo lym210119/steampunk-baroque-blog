@@ -1,9 +1,17 @@
 import { getSortedPostsData } from '@/lib/posts'
 import Link from 'next/link'
 
+// 生成所有可能的标签路径
+export async function generateStaticParams() {
+  const posts = getSortedPostsData()
+  // 提取所有标签，去重
+  const allTags = Array.from(new Set(posts.flatMap(post => post.tags)))
+  return allTags.map(tag => ({ tag }))
+}
+
 export default function TagPage({ params }: { params: { tag: string } }) {
   const allPosts = getSortedPostsData()
-  const tag = decodeURIComponent(params.tag)
+  const tag = params.tag // params.tag 已经是解码后的值，无需再次解码
   const posts = allPosts.filter(post => post.tags.includes(tag))
 
   return (
