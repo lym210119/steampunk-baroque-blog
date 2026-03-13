@@ -22,16 +22,10 @@ export default async function PostPage({ params }: { params: { id: string } }) {
         </div>
       </header>
 
-{postData.contentHtml ? (
-‹div
-className="prose prose-invert
-prose-headings:font-serif prose-a:text-brass-300 max-w-none"
-dangerouslySet InnerHTML={f __html:
-postData.contentHtml ｝｝
-/>
-）：（
-<P>文章内容加载失败</p>
-）｝
+      <div 
+        className="prose prose-invert prose-headings:font-serif prose-a:text-brass-300 max-w-none"
+        dangerouslySetInnerHTML={{ __html: postData.contentHtml }} 
+      />
 
       <footer className="mt-12 pt-6 border-t-2 border-brass-700">
         <Comments />
