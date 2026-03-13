@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-metal-dark text-parchment font-sans antialiased;
+    background-image: url('/textures/old-paper.jpg');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-brass-300;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
+  }
+
+  /* 齿轮装饰（用于特定容器） */
+  .gear-corner::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    background: url('/gears/corner-gear.svg') no-repeat center/contain;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* 巴洛克边框 */
+  .baroque-border {
+    border: 4px solid transparent;
+    border-image: url('/borders/baroque-gold-border.png') 30 stretch;
+    box-shadow: 0 0 20px rgba(201, 166, 76, 0.3);
+  }
+
+  /* 铆钉效果（用于卡片） */
+  .rivet-corner {
+    @apply relative;
+  }
+  .rivet-corner::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 16px;
+    height: 16px;
+    background: url('/rivet.svg') no-repeat center/contain;
+    opacity: 0.5;
+  }
+}
+
+@layer components {
+  .btn-brass {
+    @apply bg-gradient-to-b from-brass-300 to-brass-700 text-metal-dark font-bold py-2 px-6 
+           border-2 border-brass-200 rounded-sm shadow-md 
+           hover:from-brass-400 hover:to-brass-800 transition-all
+           relative overflow-hidden;
+  }
+  .btn-brass::after {
+    content: '';
+    @apply absolute inset-0 bg-[url('/rivet.svg')] bg-repeat opacity-10 pointer-events-none;
+  }
+
+  .post-card {
+    @apply relative p-6 bg-black/40 border-2 border-brass-700 rounded-sm shadow-embossed 
+           before:absolute before:inset-0 before:border before:border-brass-500/30 before:pointer-events-none
+           after:absolute after:top-2 after:left-2 after:w-4 after:h-4 after:bg-[url('/rivet.svg')] after:opacity-50;
+  }
+}
+
+/* Markdown 内容样式 */
+.prose {
+  @apply text-parchment/90;
+}
+.prose h1, .prose h2, .prose h3 {
+  @apply text-brass-300;
+}
+.prose a {
+  @apply text-brass-300 underline decoration-brass-700 underline-offset-2;
+}
+.prose blockquote {
+  @apply border-l-4 border-brass-700 pl-4 italic;
+}
+.prose code {
+  @apply font-mono text-brass-200 bg-black/40 px-1 py-0.5 rounded;
+}
