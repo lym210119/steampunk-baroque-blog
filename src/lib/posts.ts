@@ -30,6 +30,7 @@ export function getSortedPostsData(): PostData[] {
 
     return {
       id,
+      contentHtml,
       title: matterResult.data.title,
       date: matterResult.data.date,
       tags: matterResult.data.tags || [],
