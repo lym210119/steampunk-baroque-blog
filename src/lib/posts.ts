@@ -13,7 +13,7 @@ export interface PostData {
   tags: string[]
   category: string
   excerpt: string
-  contentHtml?: string
+  contentHtml: string
 }
 
 export function getSortedPostsData(): PostData[] {
